@@ -103,6 +103,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# csearch
+# csearch:
 .idea
 node_modules
