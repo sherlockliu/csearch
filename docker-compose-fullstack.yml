@@ -1,0 +1,16 @@
+version: '2.2'
+services:
+  elasticsearch:
+    image: elasticsearch
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+
+volumes:
+  esdata1:
+    driver: local
