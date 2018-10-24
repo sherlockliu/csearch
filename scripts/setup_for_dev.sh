@@ -6,7 +6,7 @@ echo "-> Creating virtualenv..."
 virtualenv --setuptools --no-site-packages --prompt="(${PWD##*/}) " -p python .venv
 
 echo "-> Activating virtualenv..."
-source .venv/scripts/activate
+source .venv/bin/activate
 
 echo "Upgrading and installing pip dependencies..."
 pip install --upgrade setuptools

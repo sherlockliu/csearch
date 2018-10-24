@@ -2,9 +2,9 @@
 
 import os
 
-from olive.app_config import APPLICATION_SETTINGS
-from olive.app_config import ROOT_LOCATION
-from olive.routes import routes
+from ctrip.app_config import APPLICATION_SETTINGS
+from ctrip.app_config import ROOT_LOCATION
+from ctrip.routes import routes
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.options import define, options, parse_command_line
@@ -31,7 +31,7 @@ def start_server():
 
     http_server = HTTPServer(application, xheaders=True)
     http_server.listen(options.port)
-
+    print('Csearch is listening on 8000.')
     IOLoop.instance().start()
 
 
