@@ -101,8 +101,6 @@ def get_pinyin_words(words):
     else:
         return result
 
-get_similar_sentence('身份证','345078',3)
-
 
 
 
