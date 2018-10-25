@@ -123,10 +123,10 @@ def get_pinyin_words(words):
     else:
         return result
 def get_least_levenshtein(word,minDistance = 1):
-    
+
     for highFrequency in cfg.get_highFrequencySearch():
         tmpDistance = levenshtein(highFrequency,word)
-        if tmpDistance <= 1:
+        if tmpDistance <= minDistance:
             return highFrequency
     return ''
 
