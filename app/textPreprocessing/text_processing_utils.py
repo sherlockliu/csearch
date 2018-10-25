@@ -3,10 +3,12 @@ from gensim.models import KeyedVectors
 from app.textPreprocessing import config as cfg
 from app.textPreprocessing.sentenceSimilarity import SentenceSimilarity
 from app.textPreprocessing.fileObject import FileObj
+from xpinyin import Pinyin
 import pandas as pd
 import re
 model_map = {}
 id_map = {}
+pinyin = Pinyin()
 def load_tfidf(hotelids,data_path):
     hotel_data = pd.read_excel(data_path)
     hotel_data = hotel_data.drop(['replycount', 'adoptedreplyid', 'askreplyid', 'replycontent', 'datachange_lasttime'],
@@ -42,11 +44,18 @@ def get_hotelids(data_path):
     for name_all, group_all in grouped_alls:
         hotelids.append(name_all)
     return hotelids
+def load_pinyin_map():
+    highFrequencySearchMap = {}
+    for word in cfg.get_highFrequencySearch():
+        highFrequencySearchMap[pinyin.get_pinyin(word,"")] = word
+    return highFrequencySearchMap
+
+highFrequencySearchMap =load_pinyin_map()
 
 hotelids = get_hotelids(cfg.get('constant', 'ask_data_path'))
 load_tfidf(hotelids,cfg.get('constant','ask_data_path'))
 def get_idmap(hotelids):
-    id_map = dict
+    id_map = {}
     for id in hotelids:
         file_obj = FileObj(cfg.get('constant','ask_data_path'))
         id_map[id] = file_obj.read_hotel_data(id).get_id_list()
@@ -67,10 +76,10 @@ def get_similar_words(sentence,num):
     result_list.append(sililar_list)
     # 返回 2个 list  原始数据分词结果 ， 和原始词意思相近的结果
     return result_list
-
+#hotelid  为数字类型
 def get_similar_sentence(sentence,hotelid,num):
     try:
-        model_map[hotelid]
+        model_map[int(hotelid)]
     except Exception:
         return []
     else:
@@ -83,6 +92,17 @@ def get_similar_sentence(sentence,hotelid,num):
         for id in sentence_index:
             result_list.append(id_list[id])
         return result_list
+
+def get_pinyin_words(words):
+    try:
+       result = highFrequencySearchMap[pinyin.get_pinyin(words,"")]
+    except Exception:
+        return ""
+    else:
+        return result
+
+get_similar_sentence('身份证','345078',3)
+
 
 
 
