@@ -2,15 +2,27 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": {
+    "/": {
+      "target": "http://localhost:5000/",
+      "secure": false
+    }
+  },
   "dependencies": {
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts": "2.0.5"
+    "react-scripts": "2.0.5",
+    "request-promise-native": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
+    "lint:scss": "stylelint 'src/**/*.scss' --syntax scss",
+    "lint:scss:fix": "stylefmt --recursive 'src/**/*.scss'",
+    "lint:js": "eslint . --ignore-path .gitignore --ext .js,.jsx",
+    "lint:js:fix": "npm run lint:js -- --fix",
+    "lint": "npm run lint:js && npm run lint:scss",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -21,5 +33,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "engines": {
+    "node": "^8.9.4",
+    "npm": "^5.6.0"
+  }
 }
