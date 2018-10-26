@@ -72,8 +72,46 @@ def comments_handler(row_dict: AttrDict):
     }
     return body
 
+def room_basic_info_handler(row_dict: AttrDict):
+    body = {
+        "hotel_id": row_dict.hotel,
+        "room_name": row_dict.roomname,
+        "room_area": row_dict.arearange,
+        "room_floor": row_dict.floorrange,
+        "room_has_window": "有窗户" if row_dict.haswindow == 2 else "无窗户"
+    }
+    return body
+
+def room_facility_info_handler(row_dict: AttrDict):
+    body = {
+        "hotel_id": row_dict.hotel,
+        "room_facility_name": row_dict.name
+    }
+    return body
+
+def hotel_facility_info_handler(row_dict: AttrDict):
+    body = {
+        "hotel_id": row_dict.hotel,
+        "hotel_facility_name": row_dict.facilityname
+    }
+    return body
+
+def pet_child_policy_handler(row_dict: AttrDict):
+    body = {
+        "hotel_id": row_dict.hotelid,
+        "is_pets_allowed": "允许携带宠物" if row_dict.ispetsallowed == 'T' else "不允许携带宠物",
+        "has_pets_fee": "收取宠物费" if row_dict.haspetsfee == 'T' else ("不收取宠物费" if row_dict.haspetsfee == 'F' else ""),
+        "chd_allowed ": "可携带儿童入住" if row_dict.allowaccomchd == 'T' else "不可携带儿童入住",
+        "using_exist_bed_allowed": "可使用现有床位" if row_dict.allowusingexgbed == 'T' else "不可使用现有床位",
+        "limit_of_chd_on_exist_bed": row_dict.limitofchdonexgbed,
+        "range_type": row_dict.rangetype,
+        "range_from_on_exg_bed": row_dict.rangefromonexgbed,
+        "range_to_on_exg_bed": row_dict.rangetoonexgbed
+    }
+    return body
 
 sheet_handler_dict = {
     "Q&A": qa_handler,
-    "点评": comments_handler
+    "点评": comments_handler,
+    "面积楼层是否有窗户": room_basic_info_handler
 }
