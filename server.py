@@ -23,8 +23,7 @@ def start_server():
         "template_path": os.path.join(
             ROOT_LOCATION,
             "app" if options.debug else "templates"
-        ),
-        "autoreload": True
+        )
     })
     application = Application(
         handlers=routes,
