@@ -86,7 +86,8 @@ def comments_handler(row_dict: AttrDict):
     if (row_dict.writingtype > 2  # 过滤酒店点评反馈
         or row_dict.contentstatus != 'T'
         or row_dict.status != 'T'
-        or not row_dict.resource):
+        or not row_dict.resource
+        or row_dict.writingcontent == "该点评为图片点评，暂无文字内容。"):
         return
     return {
         "hotel_id": str(int(row_dict.resource)),
