@@ -106,4 +106,4 @@ venv.bak/
 # csearch:
 .idea/
 data/
-node_modules
+node_modules/

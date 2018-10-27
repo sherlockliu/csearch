@@ -3,12 +3,10 @@ from gensim.models import KeyedVectors
 from app.textPreprocessing import config as cfg
 from app.textPreprocessing.sentenceSimilarity import SentenceSimilarity
 from app.textPreprocessing.fileObject import FileObj
-from xpinyin import Pinyin
 import pandas as pd
 import re
 model_map = {}
 id_map = {}
-pinyin = Pinyin()
 def load_tfidf(hotelids,data_path):
     hotel_data = pd.read_excel(data_path)
     hotel_data = hotel_data.drop(['replycount', 'adoptedreplyid', 'askreplyid', 'replycontent', 'datachange_lasttime'],
@@ -44,18 +42,11 @@ def get_hotelids(data_path):
     for name_all, group_all in grouped_alls:
         hotelids.append(name_all)
     return hotelids
-def load_pinyin_map():
-    highFrequencySearchMap = {}
-    for word in cfg.get_highFrequencySearch():
-        highFrequencySearchMap[pinyin.get_pinyin(word,"")] = word
-    return highFrequencySearchMap
-
-highFrequencySearchMap =load_pinyin_map()
 
 hotelids = get_hotelids(cfg.get('constant', 'ask_data_path'))
 load_tfidf(hotelids,cfg.get('constant','ask_data_path'))
 def get_idmap(hotelids):
-    id_map = {}
+    id_map = dict
     for id in hotelids:
         file_obj = FileObj(cfg.get('constant','ask_data_path'))
         id_map[id] = file_obj.read_hotel_data(id).get_id_list()
@@ -63,28 +54,6 @@ def get_idmap(hotelids):
 
 word2Vec = KeyedVectors.load_word2vec_format(cfg.get('model','word2vec_path'))
 seg = Seg()
-
-
-def levenshtein(s, t):
-    if s == t:
-        return 0
-    elif len(s) == 0:
-        return len(t)
-    elif len(t) == 0:
-        return len(s)
-    v0 = [None] * (len(t) + 1)
-    v1 = [None] * (len(t) + 1)
-    for i in range(len(v0)):
-        v0[i] = i
-    for i in range(len(s)):
-        v1[0] = i + 1
-        for j in range(len(t)):
-            cost = 0 if s[i] == t[j] else 1
-            v1[j + 1] = min(v1[j] + 1, v0[j + 1] + 1, v0[j] + cost)
-        for j in range(len(v0)):
-            v0[j] = v1[j]
-
-    return v1[len(t)]
 
 def get_similar_words(sentence,num):
     result_list = []
@@ -98,10 +67,10 @@ def get_similar_words(sentence,num):
     result_list.append(sililar_list)
     # 返回 2个 list  原始数据分词结果 ， 和原始词意思相近的结果
     return result_list
-#hotelid  为数字类型
+
 def get_similar_sentence(sentence,hotelid,num):
     try:
-        model_map[int(hotelid)]
+        model_map[hotelid]
     except Exception:
         return []
     else:
@@ -114,23 +83,6 @@ def get_similar_sentence(sentence,hotelid,num):
         for id in sentence_index:
             result_list.append(id_list[id])
         return result_list
-
-def get_pinyin_words(words):
-    try:
-       result = highFrequencySearchMap[pinyin.get_pinyin(words,"")]
-    except Exception:
-        return ""
-    else:
-        return result
-def get_least_levenshtein(word,minDistance = 1):
-
-    for highFrequency in cfg.get_highFrequencySearch():
-        tmpDistance = levenshtein(highFrequency,word)
-        if tmpDistance <= minDistance:
-            return highFrequency
-    return ''
-
-
 
 
 

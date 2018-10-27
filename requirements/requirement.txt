@@ -1,5 +1,5 @@
 tornado==4.4.1
-elasticsearch
+elasticsearch>=5.0.0,<6.0.0
 pandas==0.23.4
 gensim==3.5.0
 xpinyin==0.5.5
