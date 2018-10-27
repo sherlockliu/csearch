@@ -2,7 +2,7 @@
 
 import os
 
-# from app.preload import Preload
+from app.preload import Preload
 from ctrip.app_config import APPLICATION_SETTINGS
 from ctrip.app_config import ROOT_LOCATION
 from ctrip.routes import routes
@@ -38,5 +38,5 @@ def start_server():
 
 
 if __name__ == '__main__':
-    # Preload.preload_file_list()
+    Preload.preload_file_list()
     start_server()

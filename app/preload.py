@@ -1,29 +1,29 @@
 import xlrd
 from attrdict import AttrDict
 
-from app.framework.elastic_search_client import ElasticSearchClient
+from app.framework.elastic_search_client import es_client
+from data import get_file_path
 
 base_path = "../data/{}.xlsx"
 base_index = "hotel_{}"
 file_name_list = [
-    "0 酒店及对应id",
+    "0 hotel",
     # "1 大家问",
     # "2 点评",
-    "3 酒店房型设施",
-    "4 酒店设施服务",
-    "5 酒店政策",
-    "6 酒店驾车步行信息"
+    "11 hotel_type",
+    "11 hotel_service",
+    "11 hotel_policy",
+    "11 hotel_traffic"
 ]
 
 
 class Preload:
-    def __init__(self):
-        self.es_client = ElasticSearchClient()
 
-    def preload_file_list(self):
+    @staticmethod
+    def preload_file_list():
         try:
             for file_name in file_name_list:
-                file = xlrd.open_workbook(base_path.format(file_name))
+                file = xlrd.open_workbook(get_file_path("{}.xlsx".format(file_name)))
                 for sheet in file.sheets():
                     try:
                         field_name_list = sheet.row_values(0)
@@ -39,7 +39,7 @@ class Preload:
                             doc_body = handler(factory.create_row_dict(sheet.row_values(index)))
                             if doc_body:
                                 doc_body['info_type'] = sheet.name
-                                self.es_client.create(base_index.format(file_name).replace(' ', ''),
+                                es_client.create(base_index.format(file_name).replace(' ', ''),
                                                       "hotel_info", doc_body)
                     except Exception as e:
                         continue
