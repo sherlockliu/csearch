@@ -4,7 +4,7 @@ import './AutoSuggestSearch.css';
 import PropTypes from 'prop-types';
 
 class AutoSuggestSearch extends Component {
-  handleSearch = (value) => {
+  handleSearch = async (value) => {
     const dataSource = await this.props.onHandleSuggest(value);
     this.setState({
       dataSource: dataSource.suggestions,
