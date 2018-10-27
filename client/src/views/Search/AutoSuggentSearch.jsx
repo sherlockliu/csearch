@@ -7,7 +7,7 @@ class AutoSuggestSearch extends Component {
   handleSearch = async (value) => {
     const dataSource = await this.props.onHandleSuggest(value);
     this.setState({
-      dataSource: dataSource.suggestions,
+      dataSource: [].concat(dataSource.hots).concat(dataSource.suggestions),
       value,
     });
   }

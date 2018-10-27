@@ -61,4 +61,16 @@ class HotHandler(CSearchHandler):
         for suggest_question in QUESTION:
             if word in suggest_question:
                 suggest_question_list.append(suggest_question)
+        if not suggest_question_list and len(word) < 4:
+            new_word = get_pinyin_words(word)
+            if new_word:
+                for hot_word in QUESTION:
+                    if new_word in hot_word:
+                        suggest_question_list.append(hot_word)
+        if not suggest_question_list and len(word) < 4 and len(word) > 1:
+            new_word = get_least_levenshtein(word)
+            if new_word:
+                for hot_word in QUESTION:
+                    if new_word in hot_word:
+                        suggest_question_list.append(hot_word)
         return suggest_question_list
