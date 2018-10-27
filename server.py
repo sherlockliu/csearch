@@ -10,6 +10,8 @@ from tornado.ioloop import IOLoop
 from tornado.options import define, options, parse_command_line
 from tornado.web import Application
 
+from framework.preload import Preload
+
 
 def start_server():
     define('port', default=8000, help='run on the given port', type=int)
@@ -36,4 +38,5 @@ def start_server():
 
 
 if __name__ == '__main__':
+    Preload.preload_file_list()
     start_server()
