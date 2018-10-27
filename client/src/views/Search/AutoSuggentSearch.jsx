@@ -5,17 +5,10 @@ import PropTypes from 'prop-types';
 
 class AutoSuggestSearch extends Component {
   handleSearch = (value) => {
-    // const dataSource = await this.props.onHandleSuggest(value);
-    // this.setState({
-    //   dataSource: dataSource.suggestions,
-    //   value,
-    // });
+    const dataSource = await this.props.onHandleSuggest(value);
     this.setState({
-      dataSource: !value ? [] : [
-        value,
-        value + value,
-        value + value + value,
-      ],
+      dataSource: dataSource.suggestions,
+      value,
     });
   }
 
