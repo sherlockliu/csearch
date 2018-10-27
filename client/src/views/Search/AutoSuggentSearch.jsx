@@ -3,17 +3,27 @@ import { AutoComplete, Button, Icon, Input } from 'antd';
 import './AutoSuggestSearch.css';
 import PropTypes from 'prop-types';
 
-function onSelect(value) {
-
-}
-
 class AutoSuggestSearch extends Component {
-  handleSearch = async (value) => {
-    const dataSource = await this.props.onHandleSuggest(value);
+  handleSearch = (value) => {
+    // const dataSource = await this.props.onHandleSuggest(value);
+    // this.setState({
+    //   dataSource: dataSource.suggestions,
+    //   value,
+    // });
     this.setState({
-      dataSource: dataSource.suggestions,
-      value,
+      dataSource: !value ? [] : [
+        value,
+        value + value,
+        value + value + value,
+      ],
     });
+  }
+
+  onSelect(value) {
+    this.setState({
+      value,
+    })
+    console.log(this.state)
   }
 
   onSearch = () => {
@@ -24,22 +34,21 @@ class AutoSuggestSearch extends Component {
     super(props);
     this.state = {
       dataSource: [],
-      value: '',
+      // value: '',
     }
   }
 
   render() {
+    const {dataSource} = this.state;
     return (
       <div className="global-search-wrapper">
         <AutoComplete
           className="global-search"
           size="large"
           style={{ width: '70%' }}
-          dataSource={this.state.dataSource}
-          onSelect={onSelect}
+          dataSource={dataSource}
           onSearch={this.handleSearch}
           placeholder="Search here."
-          optionLabelProp="text"
         >
           <Input
             suffix={(
