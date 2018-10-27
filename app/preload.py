@@ -16,8 +16,20 @@ file_name_list = [
     "11 hotel_traffic"
 ]
 
+hot_question_list = [
+    "为什么没有送机服务",
+    "为什么同样的房型几种价格呢",
+    "为什么小朋友需要另付早餐费",
+    "为什么没有到机场的免费接驳巴士",
+    "为什么没有游泳池",
+    "为什么不可以加床"
+]
 
 class Preload:
+    @staticmethod
+    def preload_hot_question_list():
+        for question in hot_question_list:
+            es_client.create(base_index.format("hot_question"), "hotel_info", question)
 
     @staticmethod
     def preload_file_list():
@@ -95,8 +107,8 @@ def room_basic_info_handler(row_dict: AttrDict):
     }
 
 
-def room_facility_info_handler(row_dict: AttrDict):
-    if not row_dict.hotel:
+def room_facility_info_handler(row_dict: AttrDict, past_facility_list=[]):
+    if not row_dict.hotel or row_dict.name in past_facility_list:
         return
     return {
         "hotel_id": str(int(row_dict.hotel)),
@@ -158,6 +170,8 @@ def notification_handler(row_dict: AttrDict):
     #     or row_dict.is
     pass
 
+def extra_bed_handler(row_dict: AttrDict):
+    pass
 
 def poi_handler(row_dict: AttrDict):
     if not row_dict.hotelid:

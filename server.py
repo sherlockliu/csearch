@@ -39,4 +39,5 @@ def start_server():
 
 if __name__ == '__main__':
     Preload.preload_file_list()
+    Preload.preload_hot_question_list()
     start_server()
