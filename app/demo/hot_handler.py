@@ -11,7 +11,7 @@ class HotHandler(CSearchHandler):
         self.write(json.dumps({"hots": hot_list, "suggestions": suggestion_list}))
 
     def _get_hot(self, id, input_context):
-        wordss = get_similar_words(input_context, 5)  # [["酒店", "早餐"],[["旅店"]["早饭"]]
+        wordss = get_similar_words(input_context, 3)  # [["酒店", "早餐"],[["旅店"]["早饭"]]
         # wordss = [['早餐'], [('大酒店', 0.7869350910186768), ('饭店', 0.7779560089111328), ('国际酒店', 0.772890567779541),
         #                      ('西式早餐', 0.708486795425415), ('单早', 0.6782412528991699), ('双早', 0.6766752004623413)]]
         hot_list = []
@@ -29,7 +29,7 @@ class HotHandler(CSearchHandler):
                 for words in wordss[1]:
                     suggestion_list.extend(self._search_suggest(words[0]))
 
-        return hot_list, suggestion_list
+        return list(set(hot_list)), list(set(suggestion_list))
 
         # if input_context == "早":
         #     return {"hot": ["早餐"], "suggestion": ["有没有早餐", "早餐多少钱", "早餐时间是到几点"]}
@@ -43,14 +43,16 @@ class HotHandler(CSearchHandler):
                 hot_word_list.append(hot_word)
         if not hot_word_list and len(word) < 4:
             new_word = get_pinyin_words(word)
-            for hot_word in HIGHFREQUENCYSEARCH:
-                if new_word in hot_word:
-                    hot_word_list.append(hot_word)
+            if new_word:
+                for hot_word in HIGHFREQUENCYSEARCH:
+                    if new_word in hot_word:
+                        hot_word_list.append(hot_word)
         if not hot_word_list and len(word) < 4 and len(word) > 1:
             new_word = get_least_levenshtein(word)
-            for hot_word in HIGHFREQUENCYSEARCH:
-                if new_word in hot_word:
-                    hot_word_list.append(hot_word)
+            if new_word:
+                for hot_word in HIGHFREQUENCYSEARCH:
+                    if new_word in hot_word:
+                        hot_word_list.append(hot_word)
 
         return hot_word_list
 
