@@ -13,23 +13,10 @@ class AutoSuggestSearchContainer extends Component {
   }
 
   componentDidMount() {
-    // request function that takes requestData as arg and makes the request
-    // const requestData = {
-    //   apiEndPoint: CSEARCH.ENDPOINT.GET_ALL_HOTEL,
-    // }
-    // onRequest(requestData).then((data) => {
-    //   this.setState({
-    //     data,
-    //   })
-    // })
-    // const hotelId = window.location.href.split('/').pop();
-    // this.setState({
-    //   hotelId,
-    // })
   }
 
   onSearch = (value) => {
-    window.location.href = `${window.location.origin}/result/${value}`;
+    window.location.href = `${window.location.origin}/result/${window.location.href.split('/').pop()}/${value}`;
   }
 
   onHandleSuggest = async (value) => {
@@ -38,7 +25,6 @@ class AutoSuggestSearchContainer extends Component {
     }
     const data = await onRequest(requestData);
     return data;
-    // return ['d','ddd','dddd'];
   }
 
   render() {

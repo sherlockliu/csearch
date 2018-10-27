@@ -11,7 +11,7 @@ const Home = () => {
       <Route path="/" component={App}>
         <Route path="/hotels" components={HotelsContainer}/>
         <Route path="/search/:id" component={AutoSuggestSearchContainer}/>
-        <Route path="/result/:id" component={ResultContainer}/>
+        <Route path="/result/:id/:word" component={ResultContainer}/>
       </Route>
     </Router>
   );

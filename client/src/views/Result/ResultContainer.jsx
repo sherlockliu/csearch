@@ -11,9 +11,12 @@ class ResultContainer extends Component {
   }
 
   componentDidMount() {
+    const params = window.location.href.split('/');
+    const word = params.pop();
+    const hotelId = params.pop();
     // request function that takes requestData as arg and makes the request
     const requestData = {
-      apiEndPoint: `hotel/346693/search/${window.location.href.split('/').pop()}`,
+      apiEndPoint: `hotel/${hotelId}/search/${word}`,
     }
     onRequest(requestData).then((data) => {
       this.setState({

@@ -17,7 +17,6 @@ class HotContainer extends Component {
           apiEndPoint: `hotel/${window.location.href.split('/').pop()}`,
       }
       onRequest(requestData).then((data) => {
-          console.log(data);
           this.setState({
               data,
           })
