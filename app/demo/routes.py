@@ -1,5 +1,7 @@
-from app.demo.handler import DemoHanlder
+from app.demo.hotel_handler import HotelHandler
+from app.demo.search_handler import SearchHandler
 
 url_pattern = (
-    (r'/demo/?', DemoHanlder),
+    (r'/search/([^/]+)', SearchHandler),
+    (r"/hotel/([^/]+)", HotelHandler)
 )
