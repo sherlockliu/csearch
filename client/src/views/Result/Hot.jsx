@@ -16,8 +16,8 @@ class Hot extends Component {
           <List.Item>
             <List.Item.Meta
               title={<a href="javascript:void(0);" onClick={()=>{
-                this.props.onClickSearch(item.title);
-              }}>{item.title}</a>}
+                this.props.onClickSearch(item);
+              }}>{item}</a>}
             />
           </List.Item>
         )}

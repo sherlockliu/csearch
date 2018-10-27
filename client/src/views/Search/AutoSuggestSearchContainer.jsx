@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AutoSuggestSearch from "./AutoSuggentSearch";
 import HotContainer from "../Result/HotContainer";
 import SearchHistoryContainer from "../Result/SearchHistoryContainer";
+const onRequest = require("../../utils/helper").default;
 
 class AutoSuggestSearchContainer extends Component {
   constructor(props) {
@@ -21,18 +22,23 @@ class AutoSuggestSearchContainer extends Component {
     //     data,
     //   })
     // })
-    const hotelId = window.location.href.split('/').pop();
-    this.setState({
-      hotelId,
-    })
+    // const hotelId = window.location.href.split('/').pop();
+    // this.setState({
+    //   hotelId,
+    // })
   }
 
   onSearch = (value) => {
     window.location.href = `${window.location.origin}/result/${value}`;
   }
 
-  onHandleSuggest = (value) => {
-    return ['d','ddd','dddd'];
+  onHandleSuggest = async (value) => {
+    const requestData = {
+      apiEndPoint: `hotel/${window.location.href.split('/').pop()}/hot/${value}`,
+    }
+    const data = await onRequest(requestData);
+    return data;
+    // return ['d','ddd','dddd'];
   }
 
   render() {

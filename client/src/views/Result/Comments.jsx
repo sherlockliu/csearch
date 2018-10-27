@@ -15,7 +15,7 @@ class Comments extends Component {
         renderItem={item => (
           <List.Item>
             <List.Item.Meta
-              title={item.title}
+              title={item.comment_content}
             />
           </List.Item>
         )}

@@ -4,7 +4,7 @@ const request = require('request-promise-native');
 const onRequest = (requestData) => request(
   {
     method: requestData.method || 'GET',
-    uri: `${window.location.href}${requestData.apiEndPoint}`,
+    uri: `${window.location.origin}/${requestData.apiEndPoint}`,
     json: requestData.json || true,
     body: requestData.body || {},
     resolveWithFullResponse: requestData.resolveWithFullResponse || false,

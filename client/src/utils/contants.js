@@ -1,6 +1,6 @@
 const CSEARCH = {
    ENDPOINT : {
-     GET_ALL_HOTEL: '/hotel_list',
+     GET_ALL_HOTEL: 'hotel_list',
    }
 };
 

@@ -14,21 +14,14 @@ class HotelsContainer extends Component {
   }
 
   componentDidMount() {
-    // request function that takes requestData as arg and makes the request
-    // const requestData = {
-    //   apiEndPoint: CSEARCH.ENDPOINT.GET_ALL_HOTEL,
-    // }
-    // onRequest(requestData).then((data) => {
-    //   this.setState({
-    //     data,
-    //   })
-    // })
+    const requestData = {
+      apiEndPoint: `${CSEARCH.ENDPOINT.GET_ALL_HOTEL}`,
+    }
+    onRequest(requestData).then((data) => {
       this.setState({
-        data:[{
-          hotel_id:233,
-          hotel_name:'hilton'
-        }],
+        data,
       })
+    })
   }
 
   render() {

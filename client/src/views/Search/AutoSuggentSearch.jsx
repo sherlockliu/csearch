@@ -8,10 +8,10 @@ function onSelect(value) {
 }
 
 class AutoSuggestSearch extends Component {
-  handleSearch = (value) => {
-    const dataSource = this.props.onHandleSuggest(value);
+  handleSearch = async (value) => {
+    const dataSource = await this.props.onHandleSuggest(value);
     this.setState({
-      dataSource,
+      dataSource: dataSource.suggestions,
       value,
     });
   }

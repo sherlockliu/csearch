@@ -32,15 +32,14 @@ class QA extends Component {
           dataSource={this.props.data}
           renderItem={item => (
             <List.Item
-              key={item.title}
+              key={item.question_id}
               actions={[<IconText type="star-o" text="156"/>, <IconText type="like-o" text="156"/>,
                 <IconText type="message" text="2"/>]}
             >
               <List.Item.Meta
-                title={<a href={item.href}>{item.title}</a>}
-                description={item.description}
+                title={<a href={item.href}>{item.question}</a>}
+                description={item.answer}
               />
-              {item.content}
             </List.Item>
           )}
         >

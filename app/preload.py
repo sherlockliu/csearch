@@ -8,12 +8,12 @@ base_path = "../data/{}.xlsx"
 base_index = "hotel_{}"
 file_name_list = [
     "0 hotel",
-    # "3 questions",
-    # "2 comments",
-    # "11 hotel_type",
-    # "11 hotel_service",
-    # "11 hotel_policy",
-    # "11 hotel_traffic"
+    "3 questions",
+    "2 comments",
+    "11 hotel_type",
+    "11 hotel_service",
+    "11 hotel_policy",
+    "11 hotel_traffic"
 ]
 
 hot_question_list = [
@@ -57,6 +57,8 @@ class Preload:
                         continue
         except Exception as e:
             print(e)
+
+        print("preload successfully")
 
 
 class RowDictFactory:
