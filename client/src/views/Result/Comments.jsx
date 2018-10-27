@@ -14,12 +14,10 @@ class Comments extends Component {
         itemLayout="horizontal"
         dataSource={this.props.data}
         renderItem={item => (
-            <Highlighter
-                highlightClassName="YourHighlightClass"
-                searchWords={["and", "or", "the"]}
-                autoEscape={true}
-                textToHighlight="The dog is chasing the cat. Or perhaps they're just playing?"
-            />
+                      <List.Item>
+            <List.Item.Meta
+              title={item.comment_content} />
+          </List.Item>
         )}
       />
     )
