@@ -1,6 +1,8 @@
 import json
 
+from app.framework.elastic_search_client import es_client
 from app.framework.handler.csearch_handler import CSearchHandler
+from app.framework.textPreprocessing.config import get_hotel_list
 
 
 class HotelListHandler(CSearchHandler):
@@ -11,5 +13,4 @@ class HotelListHandler(CSearchHandler):
 
     @staticmethod
     def _get_hotel_list():
-        # return get_hotel_list()
-        return [{"id": 346693, "name": "三亚亚龙湾华宇度假酒店"}]
+        return [{"hotel_id": hotel[1], "hotel_name": hotel[0]} for hotel in get_hotel_list()[0:5]]

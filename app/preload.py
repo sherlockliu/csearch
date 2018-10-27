@@ -8,12 +8,12 @@ base_path = "../data/{}.xlsx"
 base_index = "hotel_{}"
 file_name_list = [
     "0 hotel",
-    # "1 大家问",
-    # "2 点评",
-    "11 hotel_type",
-    "11 hotel_service",
-    "11 hotel_policy",
-    "11 hotel_traffic"
+    # "3 questions",
+    # "2 comments",
+    # "11 hotel_type",
+    # "11 hotel_service",
+    # "11 hotel_policy",
+    # "11 hotel_traffic"
 ]
 
 hot_question_list = [
@@ -83,12 +83,12 @@ def qa_handler(row_dict: AttrDict):
 
 
 def comments_handler(row_dict: AttrDict):
-    if (row_dict.writingtype > 2  # 过滤酒店点评反馈
-        or row_dict.contentstatus != 'T'
-        or row_dict.status != 'T'
-        or not row_dict.resource
-        or row_dict.writingcontent == "该点评为图片点评，暂无文字内容。"):
-        return
+    # if (row_dict.writingtype > 2  # 过滤酒店点评反馈
+    #     or row_dict.contentstatus != 'T'
+    #     or row_dict.status != 'T'
+    #     or not row_dict.resource
+    #     or row_dict.writingcontent == "该点评为图片点评，暂无文字内容。"):
+    #     return
     return {
         "hotel_id": str(int(row_dict.resource)),
         "comment_title": row_dict.writingtitle,

@@ -1,6 +1,7 @@
 import json
 
 from app.framework.handler.csearch_handler import CSearchHandler
+from app.framework.textPreprocessing.config import get_highFrequencySearch
 
 
 class HotelHandler(CSearchHandler):
@@ -10,5 +11,4 @@ class HotelHandler(CSearchHandler):
 
     @staticmethod
     def _get_hotel_by_id(id):
-        # return get_hot(id)
-        return ["早餐", "加床"]
+        return get_highFrequencySearch()[0:5]
