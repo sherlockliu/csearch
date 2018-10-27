@@ -105,5 +105,6 @@ venv.bak/
 
 # csearch:
 .idea/
-data/
+data/*.xlsx
+data/*.bz2
 node_modules/
