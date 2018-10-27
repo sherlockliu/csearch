@@ -8,7 +8,6 @@ import QA from "./QA";
 const TabPane = Tabs.TabPane;
 
 class Result extends Component {
- // <TabPane tab="静态" key="3"><StructData data={this.props.data.structData}/></TabPane>
   render() {
     return (
       <Tabs defaultActiveKey="1">
@@ -18,6 +17,11 @@ class Result extends Component {
           loading={false}
           hasMore={false}
         /></TabPane>
+        <TabPane tab="酒店信息" key="3">
+            <StructData
+                data={this.props.data.data}
+            />
+        </TabPane>
       </Tabs>
     )
   }

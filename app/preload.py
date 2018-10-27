@@ -113,6 +113,7 @@ def room_basic_info_handler(row_dict: AttrDict):
 def room_facility_info_handler(row_dict: AttrDict, past_facility_list=[]):
     if not row_dict.hotel or row_dict.name in past_facility_list:
         return
+    past_facility_list.append(row_dict.name)
     return {
         "hotel_id": str(int(row_dict.hotel)),
         "room_facility_name": row_dict.name

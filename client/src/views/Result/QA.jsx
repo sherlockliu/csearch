@@ -38,7 +38,7 @@ class QA extends Component {
             >
               <List.Item.Meta
                 title={<a href={item.href}>{item.question}</a>}
-                description={item.answer}
+                description={item.answer===''||item.answer==='NULL'?'':item.answer}
               />
             </List.Item>
           )}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List } from "antd";
+import Highlighter from "react-highlight-words";
 
 class Comments extends Component {
   constructor(props){
@@ -13,11 +14,12 @@ class Comments extends Component {
         itemLayout="horizontal"
         dataSource={this.props.data}
         renderItem={item => (
-          <List.Item>
-            <List.Item.Meta
-              title={item.comment_content}
+            <Highlighter
+                highlightClassName="YourHighlightClass"
+                searchWords={["and", "or", "the"]}
+                autoEscape={true}
+                textToHighlight="The dog is chasing the cat. Or perhaps they're just playing?"
             />
-          </List.Item>
         )}
       />
     )

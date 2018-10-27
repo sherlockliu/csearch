@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Collapse, List } from "antd";
+import Highlighter from "react-highlight-words";
 const Panel = Collapse.Panel;
 
-class Hot extends Component {
+
+class StructData extends Component {
   constructor(props){
     super(props);
   }
@@ -13,25 +15,28 @@ class Hot extends Component {
   }
 
   render() {
+    let content = '';
+    if (this.props.data){
+        content = JSON.stringify(this.props.data);
+    }
     return (
       <Collapse defaultActiveKey={['1']}>
         <Panel header="房间基本信息" key="1">
-          <p>{this.props.data.roomInfo}</p>
-        </Panel>
-        <Panel header="房间设置" key="2">
-          <p>{this.props.data.roomSetting}</p>
-        </Panel>
-        <Panel header="酒店设置" key="3">
-          <p>{this.props.data.hotelSetting}</p>
+            <Highlighter
+                 highlightClassName="YourHighlightClass"
+                 searchWords={[]}
+                 autoEscape={true}
+                 textToHighlight={content}
+            />
         </Panel>
       </Collapse>
     )
   }
 }
 
-Hot.propTypes = {
+StructData.propTypes = {
   data: PropTypes.object.isRequired,
 };
 
 
-export default Hot;
+export default StructData;
