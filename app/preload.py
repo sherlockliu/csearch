@@ -59,11 +59,12 @@ class RowDictFactory:
         return row_dict
 
 
-def qa_handler(row_dict: AttrDict) -> dict:
+def qa_handler(row_dict: AttrDict):
     if not row_dict.masterhotelid:
         return
     return {
         "hotel_id": str(int(row_dict.masterhotelid)),
+        "question_id": str(int(row_dict.askid)),
         "question": row_dict.asktitle,
         "answer": row_dict.replycontent
     }
@@ -168,7 +169,8 @@ def poi_handler(row_dict: AttrDict):
         "drive_duration": row_dict.driveduration,
         "walk_distance": row_dict.walkdistance,
         "walk_duration": row_dict.walkduration,
-        "poi_name": row_dict.POIname
+        "poi_name": row_dict.POIname,
+        "poi_type": row_dict.poitype
     }
 
 def hotel_name_handler(row_dict:AttrDict):
