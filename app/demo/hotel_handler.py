@@ -10,4 +10,5 @@ class HotelHandler(CSearchHandler):
 
     @staticmethod
     def _get_hotel_by_id(id):
-        return {"id": id}
+        # return get_hot(id)
+        return ["早餐", "加床"]
