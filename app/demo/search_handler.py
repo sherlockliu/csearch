@@ -13,9 +13,9 @@ class SearchHandler(CSearchHandler):
 
     def _get_related_data(self, id, search_context):
         wordss = get_similar_words(search_context, 5)
-        question_list = get_similar_sentence(search_context, int(id), 3)
+        question_id_list = get_similar_sentence(search_context, int(id), 3)
         # wordss = [['早餐', '房型'], [('西式早餐', 0.708486795425415), ('单早', 0.6782412528991699), ('双早', 0.6766752004623413)]]
-        # question_list = self._search_questions_by_ids(id, [1265004, 1298142, 1319382])
+        question_list = self._search_questions_by_ids(id, list(set(question_id_list)))
         comment_list = []
         data_list = []
         if wordss:

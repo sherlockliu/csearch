@@ -12,7 +12,7 @@ class HotHandler(CSearchHandler):
 
     def _get_hot(self, id, input_context):
         wordss = get_similar_words(input_context, 5)  # [["酒店", "早餐"],[["旅店"]["早饭"]]
-        # wordss = [['酒店', '早餐'], [('大酒店', 0.7869350910186768), ('饭店', 0.7779560089111328), ('国际酒店', 0.772890567779541),
+        # wordss = [['早餐'], [('大酒店', 0.7869350910186768), ('饭店', 0.7779560089111328), ('国际酒店', 0.772890567779541),
         #                      ('西式早餐', 0.708486795425415), ('单早', 0.6782412528991699), ('双早', 0.6766752004623413)]]
         hot_list = []
         suggestion_list = []
@@ -22,15 +22,13 @@ class HotHandler(CSearchHandler):
             if len(hot_list) < 5:
                 for words in wordss[1]:
                     hot_list.extend(self._search_hot(words[0]))
+
             for word in wordss[0]:
                 suggestion_list.extend(self._search_suggest(word))
-            if len(hot_list) < 5:
-                for words in wordss[1]:
-                    hot_list.extend(self._search_hot(words[0]))
-
             if len(suggestion_list) < 5:
                 for words in wordss[1]:
                     suggestion_list.extend(self._search_suggest(words[0]))
+
         return hot_list, suggestion_list
 
         # if input_context == "早":
