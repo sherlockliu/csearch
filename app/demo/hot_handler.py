@@ -52,4 +52,5 @@ class HotHandler(CSearchHandler):
 
     @staticmethod
     def _parse_result(result):
-        return []
+        if result.get('hits', {}).get('hits', []):
+            return [hits.get('_source') for hits in result.get('hits').get('hits')]

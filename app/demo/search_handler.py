@@ -14,8 +14,7 @@ class SearchHandler(CSearchHandler):
     def _get_related_data(self, id, search_context):
         # wordss = get_similar_words(search_context)
         # question_list = get_similar_sentence(search_context)
-        wordss = [['酒店', '早餐'], [('大酒店', 0.7869350910186768), ('饭店', 0.7779560089111328), ('国际酒店', 0.772890567779541),
-                                 ('西式早餐', 0.708486795425415), ('单早', 0.6782412528991699), ('双早', 0.6766752004623413)]]
+        wordss = [['窗户'], [('西式早餐', 0.708486795425415), ('单早', 0.6782412528991699), ('双早', 0.6766752004623413)]]
         question_list = self._search_questions_by_ids([5502021, 5250280, 4459035])
         comment_list = []
         data_list = []
@@ -30,9 +29,12 @@ class SearchHandler(CSearchHandler):
                     comment_list.extend(self._search_words_in_comments(id, word_list))
             word_list = wordss[0]
             data_list.extend(self._search_words_in_data(id, word_list))
-            if len(comment_list) < 5:
-                for words in wordss[1]:
-                    comment_list.extend(self._search_words_in_comments(id, [words[0]]))
+            while len(word_list) > 1:
+                if len(data_list) >= 5:
+                    break
+                else:
+                    word_list.pop()
+                    data_list.extend(self._search_words_in_data(id, word_list))
 
             if len(data_list) < 5:
                 for words in wordss[1]:
@@ -41,8 +43,9 @@ class SearchHandler(CSearchHandler):
         # return {"comments": [{"id": "1", "title": "早餐", "context": "早餐很好吃", "author": "horison", "time": "2018-09-12 19:00:23"}], "questions": [], "data": []}
 
     def _search_words_in_comments(self, id, word_list):
-        result = es_client.search_words_in_comments(id, word_list)
-        return self._parse_comment_result(result)
+        # result = es_client.search_words_in_comments(id, word_list)
+        # return self._parse_comment_result(result)
+        return []
 
     def _search_words_in_data(self, id, word_list):
         result = es_client.search_words_in_data(id, word_list)
@@ -59,8 +62,10 @@ class SearchHandler(CSearchHandler):
 
     @staticmethod
     def _parse_comment_result(result):
-        return []
+        if result.get('hits', {}).get('hits', []):
+            return [hits.get('_source') for hits in result.get('hits').get('hits')]
 
     @staticmethod
     def _parse_data_result(result):
-        return []
+        if result.get('hits', {}).get('hits', []):
+            return [hits.get('_source') for hits in result.get('hits').get('hits')]

@@ -9,15 +9,14 @@ class ElasticSearchClient:
         self.client.index(index=index_name, doc_type=doc_type, body=body)
 
     def search_words_in_comments(self, id, word_list: list):
-        query_string = " AND ".join(word_list)
+        query_string = '\"' + '"\" AND \"'.join(word_list) + '\"'
         res = self._search(index_name="hotel_2*", doc_type="hotel_info", body={
             "query": {
                 "bool": {
                     "must": [
                         {
                             "query_string": {
-                                "query": query_string,
-                                "analyze_wildcard": True
+                                "query": query_string
                             }
                         },
                         {
@@ -33,15 +32,14 @@ class ElasticSearchClient:
         return res
 
     def search_words_in_data(self, id, word_list: list):
-        query_string = " AND ".join(word_list)
+        query_string = '\"' + '"\" AND \"'.join(word_list) + '\"'
         res = self._search(index_name="hotel_11*", doc_type="hotel_info", body={
             "query": {
                 "bool": {
                     "must": [
                         {
                             "query_string": {
-                                "query": query_string,
-                                "analyze_wildcard": True
+                                "query": query_string
                             }
                         },
                         {
@@ -87,8 +85,7 @@ class ElasticSearchClient:
                     "must": [
                         {
                             "query_string": {
-                                "query": word,
-                                "analyze_wildcard": True
+                                "query": '\"' + word + '\"'
                             }
                         },
                         {
@@ -104,15 +101,14 @@ class ElasticSearchClient:
         return res
 
     def search_suggestion(self, id, word_list):
-        query_string = " AND ".join(word_list)
+        query_string = '\"' + '"\" AND \"'.join(word_list) + '\"'
         res = self._search(index_name="hotel_12*", doc_type="hotel_info", body={
             "query": {
                 "bool": {
                     "must": [
                         {
                             "query_string": {
-                                "query": query_string,
-                                "analyze_wildcard": True
+                                "query": query_string
                             }
                         },
                         {
