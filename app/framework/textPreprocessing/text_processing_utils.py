@@ -88,7 +88,7 @@ def levenshtein(s, t):
 
 def get_similar_words(sentence,num):
     if len(sentence) <= 3:
-        return sentence
+        return [[sentence],[]]
     result_list = []
     sililar_list = []
     # 原始数据分词后结果
