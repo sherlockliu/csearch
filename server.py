@@ -2,6 +2,7 @@
 
 import os
 
+from app.preload import Preload
 from ctrip.app_config import APPLICATION_SETTINGS
 from ctrip.app_config import ROOT_LOCATION
 from ctrip.routes import routes
@@ -9,8 +10,6 @@ from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.options import define, options, parse_command_line
 from tornado.web import Application
-
-from framework.preload import Preload
 
 
 def start_server():

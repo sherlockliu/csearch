@@ -1,7 +1,7 @@
 #encoding=utf-8
 
 import pandas as pd
-from app.textPreprocessing.hotel_ask_data import HotelAskData
+from app.framework.textPreprocessing.hotel_ask_data import HotelAskData
 import re
 class FileObj(object):
 

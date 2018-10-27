@@ -2,7 +2,8 @@
 
 import jieba
 import codecs
-from app.textPreprocessing import config as cfg
+from app.framework.textPreprocessing import config as cfg
+
 
 class Seg(object):
     stopwords = []

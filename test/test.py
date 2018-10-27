@@ -1,4 +1,4 @@
-import app.textPreprocessing.text_processing_utils as utils
+import app.framework.textPreprocessing.text_processing_utils as utils
 import os
 
 from data import get_file_path

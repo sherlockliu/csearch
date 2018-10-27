@@ -1,8 +1,8 @@
-from app.textPreprocessing.zhcnSegment import *
+from app.framework.textPreprocessing.zhcnSegment import *
 from gensim.models import KeyedVectors
-from app.textPreprocessing import config as cfg
-from app.textPreprocessing.sentenceSimilarity import SentenceSimilarity
-from app.textPreprocessing.fileObject import FileObj
+from app.framework.textPreprocessing import config as cfg
+from app.framework.textPreprocessing.sentenceSimilarity import SentenceSimilarity
+from app.framework.textPreprocessing.fileObject import FileObj
 import pandas as pd
 import re
 model_map = {}

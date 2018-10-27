@@ -1,9 +1,9 @@
 #encoding=utf-8
 import heapq
 from gensim import corpora, models, similarities
-from app.textPreprocessing.sentence import Sentence
+from app.framework.textPreprocessing.sentence import Sentence
 from collections import defaultdict
-import app.textPreprocessing.config as cfg
+import app.framework.textPreprocessing.config as cfg
 class SentenceSimilarity():
 
     def __init__(self,seg):

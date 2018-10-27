@@ -1,4 +1,4 @@
-from framework.handler.csearch_handler import CSearchHandler
+from app.framework.handler.csearch_handler import CSearchHandler
 
 
 class DemoHanlder(CSearchHandler):

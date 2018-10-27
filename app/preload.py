@@ -1,7 +1,7 @@
 import xlrd
 from attrdict import AttrDict
 
-from framework.elastic_search_client import ElasticSearchClient
+from app.framework.elastic_search_client import ElasticSearchClient
 
 base_path = "../data/{file_name}.xlsx"
 base_index = "hotel_{}"
